@@ -18,7 +18,7 @@ function displayPlaces(e){
 	const filteredCities = findPlaces(this.value, cities);
 	const html = filteredCities.map(city => {
 	return `
-	 <li>${city.name}</li>
+	 <li>${city.name}, ${city.population}</li>
 	`
     }).join("");
 
