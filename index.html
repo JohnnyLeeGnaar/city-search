@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>city finder</title>
-	<meta charset="UTF-8"> 
+	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <input type="text" class="search" placeholder="Pronađite grad ili županiju" name="">
-  <h1>Cities:</h1>
-  <div class="wrapper">
-  	<table class="Tcity">
-  	<thead>
-  		<tr>
-  			<th class="firstTH">City name</th>
-  			<th class="secondTH">Population</th>
-  		</tr>
-  	</thead>
-  	<tbody>
-  		<tr class="city-list">
-  			<td><h2>Searching for cities in Croatia:</h2></td>
-  		</tr>
-  	</tbody>
-  </table>
-  </div>
-  
-	
-	
-	<script type="text/javascript" src="index.js"></script>
+	<div class="app">
+
+		<div class="toolbar">
+			<h3>Cities:</h3>
+			<input type="text" class="search" placeholder="Search for a city or county" name="">
+		</div>
+
+
+		<table class="t-city">
+			<thead>
+				<tr>
+					<th>City name</th>
+					<th>Population</th>
+					<th>County</th>
+				</tr>
+			</thead>
+			<tbody class="city-list">
+				<tr>
+					<td>
+						<h2>Searching for cities in Croatia:</h2>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+
+	<script src="index.js" type="module"></script>
 </body>
+
 </html>
 
 

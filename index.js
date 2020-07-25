@@ -1,7 +1,9 @@
+import mockData from './mock-data/cities.js';
+
 const link = "http://api.geonames.org/searchJSON?username=joedoe92&country=hr&maxRows=1000&style=LONG&lang=hr&type=json&cities=cities5000";
-const cities = [];
-let loading = false;
-const data = fetch(link).then(blob => blob.json()).then(data => cities.push(...data.geonames)).then(loading = true);
+const cities = [...mockData.JSON.geonames];
+let loading = true;
+//const data = fetch(link).then(blob => blob.json()).then(data => cities.push(...data.geonames)).then(loading = true);
 const userList = document.querySelector('.city-list');
 const userInput = document.querySelector('.search');
 let html;
@@ -22,7 +24,11 @@ function displayPlaces(e){
     filteredCities = findPlaces(this.value, cities);
 	html = filteredCities.map(city => {
 	return `
-	 <td>${city.name}, ${city.population}</td>
+	 <tr>
+		 <td>${city.name}</td>
+		 <td>${city.population}</td>
+		 <td>${city.adminName1}</td>
+	</tr>
 	`
     }).join("");
 
@@ -33,7 +39,11 @@ function loadOn(){
 
 	console.log(city.name)
 	return `
-	 <td>${city.name}, ${city.population}</td>
+	<tr>
+		 <td>${city.name}</td>
+		 <td>${city.population}</td>
+		 <td>${city.adminName1}</td>
+	</tr>
 	`
     }).sort().join("");
 	userList.innerHTML = html;
