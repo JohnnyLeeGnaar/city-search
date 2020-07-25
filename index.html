@@ -6,15 +6,49 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <form>
-  	<input type="text" class="search" placeholder="Pronađite grad ili županiju" name="">
-  	<ul class="city-list">
-		<li>Search cities in Croatia:</li>
-	</ul>
-	<input type="button" class="toggle-button" value="toggle">
-  </form>
-	<h1>Cities:</h1>
+  <input type="text" class="search" placeholder="Pronađite grad ili županiju" name="">
+  <h1>Cities:</h1>
+  <div class="wrapper">
+  	<table class="Tcity">
+  	<thead>
+  		<tr>
+  			<th class="firstTH">City name</th>
+  			<th class="secondTH">Population</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr class="city-list">
+  			<td><h2>Searching for cities in Croatia:</h2></td>
+  		</tr>
+  	</tbody>
+  </table>
+  </div>
+  
+	
 	
 	<script type="text/javascript" src="index.js"></script>
 </body>
 </html>
+
+
+<!--
+
+	/*<table>
+    <thead>
+        <tr>
+            <th colspan="2">The table header</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>The table body</td>
+            <td>with two columns</td>
+        </tr>
+    </tbody>
+</table>*/
+
+<ul class="city-list">
+		<li><h2>Searching cities in Croatia:</h2></li>
+	</ul>
+
+-->

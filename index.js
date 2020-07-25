@@ -1,8 +1,11 @@
 const link = "http://api.geonames.org/searchJSON?username=joedoe92&country=hr&maxRows=1000&style=LONG&lang=hr&type=json&cities=cities5000";
 const cities = [];
-const data = fetch(link).then(blob => blob.json()).then(data => cities.push(...data.geonames))
+let loading = false;
+const data = fetch(link).then(blob => blob.json()).then(data => cities.push(...data.geonames)).then(loading = true);
 const userList = document.querySelector('.city-list');
 const userInput = document.querySelector('.search');
+let html;
+let load;
 
 
 function findPlaces(cityInput, cities){
@@ -15,15 +18,47 @@ function findPlaces(cityInput, cities){
 
 function displayPlaces(e){
 
-	const filteredCities = findPlaces(this.value, cities);
-	const html = filteredCities.map(city => {
+	let filteredCities = cities;
+    filteredCities = findPlaces(this.value, cities);
+	html = filteredCities.map(city => {
 	return `
-	 <li>${city.name}, ${city.population}</li>
+	 <td>${city.name}, ${city.population}</td>
 	`
     }).join("");
 
  	userList.innerHTML = html;
 }
+function loadOn(){
+	html = cities.map(city => {
 
+	console.log(city.name)
+	return `
+	 <td>${city.name}, ${city.population}</td>
+	`
+    }).sort().join("");
+	userList.innerHTML = html;
+	test = true;
+}
+
+window.addEventListener('load', () =>{
+	if(!loading) return console.error('something went wrong')
+	load = setTimeout(loadOn, 1000)
+	
+});
+clearInterval(load);
 userInput.addEventListener('change', displayPlaces);
 userInput.addEventListener('keyup', displayPlaces);
+
+/*<table>
+    <thead>
+        <tr>
+            <th colspan="2">The table header</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>The table body</td>
+            <td>with two columns</td>
+        </tr>
+    </tbody>
+</table>*/

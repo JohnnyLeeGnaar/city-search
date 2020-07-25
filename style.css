@@ -1,0 +1,22 @@
+body{
+	margin: 0
+}
+.Tcity{
+	display: block;
+}
+
+.firstTH{
+width: 66,6%;
+}
+
+.secondTH{
+width: 33,3%;
+}
+
+td{
+	display: inline-block;
+}
+
+.Tcity{
+	display: table;
+}
