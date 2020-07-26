@@ -30,3 +30,11 @@ th, td {
 	padding: 5px;
 	text-align: left;
 }
+
+th:hover{
+	background-color: orange;
+}
+
+.active{
+	background: red;
+}

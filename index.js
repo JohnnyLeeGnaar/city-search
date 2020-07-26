@@ -8,7 +8,6 @@ const userList = document.querySelector('.city-list');
 const userInput = document.querySelector('.search');
 const tableHeaders = document.querySelectorAll('[data-val]');
 let html;
-let load;
 let changeDirection = false;
 
 
@@ -18,8 +17,6 @@ function findPlaces(cityInput, cities){
 	return cities.filter(city => city.name.match(regex))
 
 }
-
-
 function displayPlaces(e){
 
 	let filteredCities = cities;
@@ -38,8 +35,6 @@ function displayPlaces(e){
 }
 function loadOn(){
 	html = cities.map(city => {
-
-	//console.log(city.name)
 	return `
 	<tr>
 		 <td>${city.name}</td>
@@ -51,29 +46,20 @@ function loadOn(){
 	userList.innerHTML = html;
 }
 
-window.addEventListener('load', () =>{
-	if(!loading) return console.error('something went wrong')
-	load = setTimeout(loadOn, 1000)
-	
-});
-
 function propCompare(value, direction){
 	if(direction === true){
 	return function (a, b){
-		return a[value] < b[value] ? 1 : -1; 
+		return value === 'population' ? a[value] < b[value] ? 1 : -1 : a[value].localeCompare(b[value]);
+
 	}
 }
 	return function (a, b){
-		return a[value] > b[value] ? 1 : -1; 
-}
-}
-
-/*function sortTable(a, b){
-	return b.population < a.population ? -1 : 1;
-}*/
+		return value === 'population' ? a[value] > b[value] ? 1 : -1 : b[value].localeCompare(a[value]);
+}}
 
 function headerSort(e){
 	let test = cities.sort(propCompare(this.dataset.val, changeDirection));
+	let lastElement;
 	html = test.map(city => {
 
 	return `
@@ -88,19 +74,13 @@ function headerSort(e){
     }).join("");
 	userList.innerHTML = html;
 	changeDirection = !changeDirection;
-	console.log(changeDirection);
 }
-clearInterval(load);
 userInput.addEventListener('change', displayPlaces);
 userInput.addEventListener('keyup', displayPlaces);
 tableHeaders.forEach(tableHeader => tableHeader.addEventListener('click', headerSort));
 
-
-/*
-items.sort(function (a, b) {
-  return a.value - b.value;
+window.addEventListener('load', () =>{
+	if(!loading) return console.error('something went wrong')
+	 setTimeout(loadOn, 1000)
 });
-*/
 
-
-//[2, 1, 0.4, 2, 0.4, 0.2, 1.5, 1, 1.1, 1.3, 1.2, 0.2, 0.4, 0.9];
