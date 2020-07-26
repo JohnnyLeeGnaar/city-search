@@ -9,6 +9,7 @@ const userInput = document.querySelector('.search');
 const tableHeaders = document.querySelectorAll('[data-val]');
 let html;
 let load;
+let changeDirection = false;
 
 
 function findPlaces(cityInput, cities){
@@ -56,10 +57,15 @@ window.addEventListener('load', () =>{
 	
 });
 
-function propCompare(value){
+function propCompare(value, direction){
+	if(direction === true){
 	return function (a, b){
 		return a[value] < b[value] ? 1 : -1; 
 	}
+}
+	return function (a, b){
+		return a[value] > b[value] ? 1 : -1; 
+}
 }
 
 /*function sortTable(a, b){
@@ -67,7 +73,7 @@ function propCompare(value){
 }*/
 
 function headerSort(e){
-	let test = cities.sort(propCompare(this.dataset.val));
+	let test = cities.sort(propCompare(this.dataset.val, changeDirection));
 	html = test.map(city => {
 
 	return `
@@ -81,6 +87,8 @@ function headerSort(e){
 	`
     }).join("");
 	userList.innerHTML = html;
+	changeDirection = !changeDirection;
+	console.log(changeDirection);
 }
 clearInterval(load);
 userInput.addEventListener('change', displayPlaces);
