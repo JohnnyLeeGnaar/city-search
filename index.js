@@ -6,6 +6,7 @@ let loading = true;
 //const data = fetch(link).then(blob => blob.json()).then(data => cities.push(...data.geonames)).then(loading = true);
 const userList = document.querySelector('.city-list');
 const userInput = document.querySelector('.search');
+const tableHeaders = document.querySelectorAll('[data-val]');
 let html;
 let load;
 
@@ -37,7 +38,7 @@ function displayPlaces(e){
 function loadOn(){
 	html = cities.map(city => {
 
-	console.log(city.name)
+	//console.log(city.name)
 	return `
 	<tr>
 		 <td>${city.name}</td>
@@ -47,7 +48,6 @@ function loadOn(){
 	`
     }).sort().join("");
 	userList.innerHTML = html;
-	test = true;
 }
 
 window.addEventListener('load', () =>{
@@ -55,20 +55,44 @@ window.addEventListener('load', () =>{
 	load = setTimeout(loadOn, 1000)
 	
 });
+
+function propCompare(value){
+	return function (a, b){
+		return a[value] < b[value] ? 1 : -1; 
+	}
+}
+
+/*function sortTable(a, b){
+	return b.population < a.population ? -1 : 1;
+}*/
+
+function headerSort(e){
+	let test = cities.sort(propCompare(this.dataset.val));
+	html = test.map(city => {
+
+	return `
+	<tr>
+		
+		 <td>${city.name}</td>
+		 <td>${city.population}</td>
+		 <td>${city.adminName1}</td>
+		
+	</tr>
+	`
+    }).join("");
+	userList.innerHTML = html;
+}
 clearInterval(load);
 userInput.addEventListener('change', displayPlaces);
 userInput.addEventListener('keyup', displayPlaces);
+tableHeaders.forEach(tableHeader => tableHeader.addEventListener('click', headerSort));
 
-/*<table>
-    <thead>
-        <tr>
-            <th colspan="2">The table header</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>The table body</td>
-            <td>with two columns</td>
-        </tr>
-    </tbody>
-</table>*/
+
+/*
+items.sort(function (a, b) {
+  return a.value - b.value;
+});
+*/
+
+
+//[2, 1, 0.4, 2, 0.4, 0.2, 1.5, 1, 1.1, 1.3, 1.2, 0.2, 0.4, 0.9];

@@ -738,7 +738,7 @@ export default {
                 },
                 "countryName": "Hrvatska",
                 "fcodeName": "seat of a second-order administrative division",
-                "adminName1": "Sisačko-Moslavaka",
+                "adminName1": "Sisačko-Moslavačka",
                 "lat": "45.475",
                 "fcode": "PPLA2"
             },
@@ -746,19 +746,19 @@ export default {
                 "adminCode1": "06",
                 "lng": "16.5425",
                 "geonameId": 3197230,
-                "toponymName": "KriÅ¾evci",
+                "toponymName": "Križevci",
                 "countryId": "3202326",
                 "fcl": "P",
                 "population": 11597,
                 "countryCode": "HR",
-                "name": "KriÅ¾evci",
+                "name": "Križevci",
                 "fclName": "city, village,...",
                 "adminCodes1": {
                     "ISO3166_2": "06"
                 },
                 "countryName": "Hrvatska",
                 "fcodeName": "seat of a second-order administrative division",
-                "adminName1": "KoprivniÄko-KriÅ¾evaÄka",
+                "adminName1": "Koprivničko-Križevačka",
                 "lat": "46.02194",
                 "fcode": "PPLA2"
             },
@@ -798,7 +798,7 @@ export default {
                 },
                 "countryName": "Hrvatska",
                 "fcodeName": "seat of a second-order administrative division",
-                "adminName1": "LiÄko-Senjska",
+                "adminName1": "Ličko-Senjska",
                 "lat": "44.98944",
                 "fcode": "PPLA2"
             },
