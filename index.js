@@ -2,6 +2,7 @@ import mockData from './mock-data/cities.js';
 
 const link = "http://api.geonames.org/searchJSON?username=joedoe92&country=hr&maxRows=1000&style=LONG&lang=hr&type=json&cities=cities5000";
 const cities = [...mockData.JSON.geonames];
+let filteredCities = cities;
 let loading = true;
 //const data = fetch(link).then(blob => blob.json()).then(data => cities.push(...data.geonames)).then(loading = true);
 const userList = document.querySelector('.city-list');
@@ -17,11 +18,8 @@ function findPlaces(cityInput, cities){
 	return cities.filter(city => city.name.match(regex))
 
 }
-function displayPlaces(e){
-
-	let filteredCities = cities;
-    filteredCities = findPlaces(this.value, cities);
-	html = filteredCities.map(city => {
+function mapCities(cities){
+	let mapArr = cities.map(city => {
 	return `
 	 <tr>
 		 <td>${city.name}</td>
@@ -31,18 +29,19 @@ function displayPlaces(e){
 	`
     }).join("");
 
+    return mapArr;
+}
+
+function displayPlaces(e){
+
+	filteredCities = cities;
+    filteredCities = findPlaces(this.value, cities);
+	html = mapCities(filteredCities);
+
  	userList.innerHTML = html;
 }
 function loadOn(){
-	html = cities.map(city => {
-	return `
-	<tr>
-		 <td>${city.name}</td>
-		 <td>${city.population}</td>
-		 <td>${city.adminName1}</td>
-	</tr>
-	`
-    }).sort().join("");
+	html = mapCities(cities);
 	userList.innerHTML = html;
 }
 
@@ -57,21 +56,9 @@ function propCompare(value, direction){
 		return value === 'population' ? a[value] > b[value] ? 1 : -1 : b[value].localeCompare(a[value]);
 }}
 
-function headerSort(e){
-	let test = cities.sort(propCompare(this.dataset.val, changeDirection));
-	let lastElement;
-	html = test.map(city => {
-
-	return `
-	<tr>
-		
-		 <td>${city.name}</td>
-		 <td>${city.population}</td>
-		 <td>${city.adminName1}</td>
-		
-	</tr>
-	`
-    }).join("");
+function headerSort(){
+	let sortedCities = filteredCities.sort(propCompare(this.dataset.val, changeDirection));
+	html = mapCities(sortedCities);
 	userList.innerHTML = html;
 	changeDirection = !changeDirection;
 }
