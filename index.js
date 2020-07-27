@@ -7,9 +7,11 @@ let loading = true;
 //const data = fetch(link).then(blob => blob.json()).then(data => cities.push(...data.geonames)).then(loading = true);
 const userList = document.querySelector('.city-list');
 const userInput = document.querySelector('.search');
+const tableRow = document.querySelector('.tRow');
 const tableHeaders = document.querySelectorAll('[data-val]');
 let html;
 let changeDirection = false;
+let target = 0;
 
 
 function findPlaces(cityInput, cities){
@@ -56,18 +58,30 @@ function propCompare(value, direction){
 		return value === 'population' ? a[value] > b[value] ? 1 : -1 : b[value].localeCompare(a[value]);
 }}
 
-function headerSort(){
+function decodeHtmlCharCodes(str) { 
+  return str.replace(/(&#(\d+);)/g, function(match, capture, charCode) {
+    return String.fromCharCode(charCode);
+  });
+}
+
+function headerSort(e){
 	let sortedCities = filteredCities.sort(propCompare(this.dataset.val, changeDirection));
+	let icon;
+	let innerText = this.innerText
 	html = mapCities(sortedCities);
 	userList.innerHTML = html;
+	icon = !changeDirection ? decodeHtmlCharCodes('&#10506;') : decodeHtmlCharCodes('&#10507;')
+	this.style.background = "red";
+	this.innerText = this.dataset.name + icon;
 	changeDirection = !changeDirection;
+	this.classList.remove('active');
 }
+
 userInput.addEventListener('change', displayPlaces);
 userInput.addEventListener('keyup', displayPlaces);
 tableHeaders.forEach(tableHeader => tableHeader.addEventListener('click', headerSort));
-
 window.addEventListener('load', () =>{
 	if(!loading) return console.error('something went wrong')
-	 setTimeout(loadOn, 1000)
+	 setTimeout(loadOn, 100)
 });
 

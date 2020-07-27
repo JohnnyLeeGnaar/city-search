@@ -33,8 +33,9 @@ th, td {
 
 th:hover{
 	background-color: orange;
+	cursor: pointer;
 }
 
-.active{
-	background: red;
+.active:before {
+  content: "<>";
 }
