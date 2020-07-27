@@ -3,15 +3,25 @@ import mockData from './mock-data/cities.js';
 const link = "http://api.geonames.org/searchJSON?username=joedoe92&country=hr&maxRows=1000&style=LONG&lang=hr&type=json&cities=cities5000";
 const cities = [...mockData.JSON.geonames];
 let filteredCities = cities;
+let indexedCities;
 let loading = true;
 //const data = fetch(link).then(blob => blob.json()).then(data => cities.push(...data.geonames)).then(loading = true);
 const userList = document.querySelector('.city-list');
 const userInput = document.querySelector('.search');
-const tableRow = document.querySelector('.tRow');
 const tableHeaders = document.querySelectorAll('[data-val]');
+const btn_next = document.querySelector(".btn_next");
+const btn_prev = document.querySelector(".btn_prev");
+const option = document.querySelector('.option__');
 let html;
 let changeDirection = false;
-let target = 0;
+let optionValue = 0;
+let lastButton;
+let pageCount = 0;
+let increment = 0;
+let sum = 0;
+let maxPages = 1;
+let pages = 0;
+
 
 
 function findPlaces(cityInput, cities){
@@ -21,8 +31,6 @@ function findPlaces(cityInput, cities){
 
 }
 function mapCities(cities){
-	console.log(cities.length, Math.round(cities.length/5));
-
 	let mapArr = cities.map(city => {
 	return `
 	 <tr>
@@ -78,9 +86,56 @@ function headerSort(e){
 	this.classList.remove('active');
 }
 
+
+function paginate(e){
+
+	sum = pageCount;
+	increment = parseInt(this.dataset.option);
+
+	if(Math.sign(increment) > 0)
+	  {
+	  	pages++;
+	  }
+	else{
+		pages--;
+	}
+
+	 
+	maxPages = Math.round(cities.length/this.dataset.option);
+	console.log(`pages ${pages} out of max pages: ${maxPages}`);
+	sum = increment < 0 ? sum+increment : sum;
+	pageCount += increment;
+	if(pageCount > cities.length){
+		this.classList.add('hidden');
+	}
+	let indexed = increment > 0 ? cities.slice(sum, pageCount) : cities.slice(sum+increment, sum)
+	console.log(sum, pageCount, cities.length)
+	//indexedCities = mapCities(indexedCities);
+	html = mapCities(indexed);
+	userList.innerHTML = html;
+
+
+	  if (pages == 0) {
+        btn_prev.style.visibility = "hidden";
+    } else {
+        btn_prev.style.visibility = "visible";
+    }
+
+    if (pages == maxPages) {
+        btn_next.style.visibility = "hidden";
+    } else {
+        btn_next.style.visibility = "visible";
+    }
+
+}
+
 userInput.addEventListener('change', displayPlaces);
 userInput.addEventListener('keyup', displayPlaces);
 tableHeaders.forEach(tableHeader => tableHeader.addEventListener('click', headerSort));
+btn_prev.addEventListener('click', paginate);
+btn_next.addEventListener('click', paginate);
+//option.addEventListener('change', (e) => {console.log(e)});
+
 window.addEventListener('load', () =>{
 	if(!loading) return console.error('something went wrong')
 	 setTimeout(loadOn, 100)
