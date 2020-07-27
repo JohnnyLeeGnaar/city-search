@@ -71,7 +71,6 @@ function headerSort(e){
 	html = mapCities(sortedCities);
 	userList.innerHTML = html;
 	icon = !changeDirection ? decodeHtmlCharCodes('&#10506;') : decodeHtmlCharCodes('&#10507;')
-	this.style.background = "red";
 	this.innerText = this.dataset.name + icon;
 	changeDirection = !changeDirection;
 	this.classList.remove('active');
