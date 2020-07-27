@@ -21,6 +21,8 @@ function findPlaces(cityInput, cities){
 
 }
 function mapCities(cities){
+	console.log(cities.length, Math.round(cities.length/5));
+
 	let mapArr = cities.map(city => {
 	return `
 	 <tr>

@@ -39,3 +39,7 @@ th:hover{
 .active:before {
   content: "<>";
 }
+
+.tHeader:active{
+	transform: scale(1.1);
+}
