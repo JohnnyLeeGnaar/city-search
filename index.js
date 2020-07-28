@@ -2,6 +2,7 @@ import mockData from './mock-data/cities.js';
 
 const link = "http://api.geonames.org/searchJSON?username=joedoe92&country=hr&maxRows=1000&style=LONG&lang=hr&type=json&cities=cities5000";
 const cities = [...mockData.JSON.geonames];
+let sortedCities = cities;
 let filteredCities = cities;
 let indexedCities;
 let loading = true;
@@ -11,6 +12,7 @@ const userInput = document.querySelector('.search');
 const tableHeaders = document.querySelectorAll('[data-val]');
 const btn_next = document.querySelector(".btn_next");
 const btn_prev = document.querySelector(".btn_prev");
+const spanInfo = document.querySelector(".spanInfo");
 const options = document.querySelectorAll('.selectToggle');
 let html;
 let changeDirection = false;
@@ -74,11 +76,13 @@ function decodeHtmlCharCodes(str) {
 }
 
 function headerSort(e){
-	let sortedCities = filteredCities.sort(propCompare(this.dataset.val, changeDirection));
+	sortedCities = filteredCities.sort(propCompare(this.dataset.val, changeDirection));
 	let icon;
 	let innerText = this.innerText
+
 	html = mapCities(sortedCities);
 	userList.innerHTML = html;
+	//paginate(sortedCities);
 	icon = !changeDirection ? decodeHtmlCharCodes('&#10506;') : decodeHtmlCharCodes('&#10507;')
 	this.innerText = this.dataset.name + icon;
 	changeDirection = !changeDirection;
@@ -105,25 +109,27 @@ function nextPage(){
   }
 }
 
+
 function paginate(){
+	console.log(filteredCities);
   let indexed;
   let parseToInt = parseInt(this.dataset.option)
-  maxPages = Math.ceil(cities.length / btn_next.dataset.option);
+  maxPages = Math.ceil(filteredCities.length / btn_next.dataset.option);
   if (pages < 0) pages = 0;
   if (pages > maxPages) pages = maxPages;
 
   if(this.name === "prev"){
 	previousPage();
-	indexed = cities.slice(Math.abs(this.dataset.option * pages), sum );
+	indexed = filteredCities.slice(Math.abs(this.dataset.option * pages), sum );
   }
   else{
 	nextPage()
-	indexed = cities.slice(sum, this.dataset.option * pages);
+	indexed = filteredCities.slice(sum, this.dataset.option * pages);
 	} 
    
-  console.log(sum, Math.abs(this.dataset.option * pages))
   html = mapCities(indexed);
   userList.innerHTML = html;
+  spanInfo.textContent = `${pages}/${maxPages}`;
 
 console.log(`${this.name} and ${pages} pages / ${maxPages}`)
 
@@ -148,6 +154,7 @@ tableHeaders.forEach(tableHeader => tableHeader.addEventListener('click', header
 options.forEach(option => option.addEventListener('change', dropDownValue));
 btn_prev.addEventListener('click', paginate);
 btn_next.addEventListener('click', paginate);
+spanInfo.addEventListener('change',paginate)
 
 
 
@@ -157,46 +164,3 @@ window.addEventListener('load', () =>{
 	 setTimeout(loadOn, 100)
 });
 
-
-
-
-
-/*	can do better than that
-	sum = pageCount;
-	increment = parseInt(this.dataset.option);
-
-	if(Math.sign(increment) > 0)
-	  {
-	  	pages++;
-	  }
-	else{
-		pages--;
-	}
-
-	 
-	maxPages = Math.round(cities.length/this.dataset.option);
-	console.log(`pages ${pages} out of max pages: ${maxPages}`);
-	sum = increment < 0 ? sum+increment : sum;
-	pageCount += increment;
-	if(pageCount > cities.length){
-		this.classList.add('hidden');
-	}
-	let indexed = increment > 0 ? cities.slice(sum, pageCount) : cities.slice(sum+increment, sum)
-	console.log(sum, pageCount, cities.length)
-	//indexedCities = mapCities(indexedCities);
-	html = mapCities(indexed);
-	userList.innerHTML = html;
-
-
-	  if (pages == 0) {
-        btn_prev.style.visibility = "hidden";
-    } else {
-        btn_prev.style.visibility = "visible";
-    }
-
-    if (pages == maxPages) {
-        btn_next.style.visibility = "hidden";
-    } else {
-        btn_next.style.visibility = "visible";
-    }
-*/
