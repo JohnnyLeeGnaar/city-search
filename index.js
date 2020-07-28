@@ -11,16 +11,15 @@ const userInput = document.querySelector('.search');
 const tableHeaders = document.querySelectorAll('[data-val]');
 const btn_next = document.querySelector(".btn_next");
 const btn_prev = document.querySelector(".btn_prev");
-const option = document.querySelector('.option__');
+const options = document.querySelectorAll('.selectToggle');
 let html;
 let changeDirection = false;
 let optionValue = 0;
-let lastButton;
-let pageCount = 0;
-let increment = 0;
-let sum = 0;
-let maxPages = 1;
 let pages = 0;
+let maxPages = 0;
+let sum = 0;
+
+
 
 
 
@@ -87,8 +86,82 @@ function headerSort(e){
 }
 
 
-function paginate(e){
+function dropDownValue(e){
+	optionValue = this.value;
+	btn_next.dataset.option = optionValue;
+	btn_prev.dataset.option = -optionValue;
+	pages = 0;
+	sum = 0;
+}
 
+function previousPage(){
+  if(pages > 0){
+   return pages--;
+  }
+}
+function nextPage(){
+  if(pages<maxPages){
+   return pages++;
+  }
+}
+
+function paginate(){
+  let indexed;
+  let parseToInt = parseInt(this.dataset.option)
+  maxPages = Math.ceil(cities.length / btn_next.dataset.option);
+  if (pages < 0) pages = 0;
+  if (pages > maxPages) pages = maxPages;
+
+  if(this.name === "prev"){
+	previousPage();
+	indexed = cities.slice(Math.abs(this.dataset.option * pages), sum );
+  }
+  else{
+	nextPage()
+	indexed = cities.slice(sum, this.dataset.option * pages);
+	} 
+   
+  console.log(sum, Math.abs(this.dataset.option * pages))
+  html = mapCities(indexed);
+  userList.innerHTML = html;
+
+console.log(`${this.name} and ${pages} pages / ${maxPages}`)
+
+ if (pages == 0) {
+        btn_prev.style.visibility = "hidden";
+    } else {
+        btn_prev.style.visibility = "visible";
+    }
+
+    if (pages == maxPages) {
+        btn_next.style.visibility = "hidden";
+    } else {
+        btn_next.style.visibility = "visible";
+    }
+
+sum += parseToInt;
+}
+
+userInput.addEventListener('change', displayPlaces);
+userInput.addEventListener('keyup', displayPlaces);
+tableHeaders.forEach(tableHeader => tableHeader.addEventListener('click', headerSort));
+options.forEach(option => option.addEventListener('change', dropDownValue));
+btn_prev.addEventListener('click', paginate);
+btn_next.addEventListener('click', paginate);
+
+
+
+
+window.addEventListener('load', () =>{
+	if(!loading) return console.error('something went wrong')
+	 setTimeout(loadOn, 100)
+});
+
+
+
+
+
+/*	can do better than that
 	sum = pageCount;
 	increment = parseInt(this.dataset.option);
 
@@ -126,18 +199,4 @@ function paginate(e){
     } else {
         btn_next.style.visibility = "visible";
     }
-
-}
-
-userInput.addEventListener('change', displayPlaces);
-userInput.addEventListener('keyup', displayPlaces);
-tableHeaders.forEach(tableHeader => tableHeader.addEventListener('click', headerSort));
-btn_prev.addEventListener('click', paginate);
-btn_next.addEventListener('click', paginate);
-//option.addEventListener('change', (e) => {console.log(e)});
-
-window.addEventListener('load', () =>{
-	if(!loading) return console.error('something went wrong')
-	 setTimeout(loadOn, 100)
-});
-
+*/
