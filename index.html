@@ -18,28 +18,24 @@
 				<option value="5"  class="option__">5</option>
 				<option value="25" class="option__">25</option>
 			</select>
-			<input type="button" class="btn_prev" data-option=-10 value="Previous page" name="prev">
-			<input type="button" class="btn_next" data-option=10 value="Next page" name="next">
-			<span class="spanInfo">/</span>
-			
-			
 		</div>
 
 
-		<table class="t-city">
+		<table class="citiesTable">
 			<thead>
-				<tr class="tRow">
-					<th class="tHeader active" data-val="name" data-name="City name">City name</th>
-					<th class="tHeader active" data-val="population" data-name="Population">Population</th>
-					<th class="tHeader active" data-val="adminName1" data-name="County">County</th>
+				<tr class="tableRow">
 				</tr>
 			</thead>
-			<tbody class="city-list">
+			<tbody class="tableCityList">
 				<tr>
 					<td>
 						<h2>Searching for cities in Croatia:</h2>
 					</td>
 				</tr>
+				<div class="tableFooter">
+					<input type="button" class="btn_prev" data-option=-5 value="Previous page" name="prev">
+					<input type="button" class="btn_next" data-option=5 value="Next page" name="next">
+				</div>
 			</tbody>
 		</table>
 	</div>

@@ -36,8 +36,21 @@ th:hover{
 	cursor: pointer;
 }
 
-.active:before {
+.active{
+	background-color: purple;
+}
+
+.asc:before {
+	content: ">";
+}
+
+.desc:before {
+	content: "<";
+}
+
+.unsorted:before {
   content: "<>";
+
 }
 
 .tHeader:active{
