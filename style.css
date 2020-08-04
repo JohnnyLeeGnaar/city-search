@@ -1,4 +1,4 @@
-body{
+body {
 	margin: 0 auto;
 }
 
@@ -14,7 +14,7 @@ body{
 	align-items: center;
 }
 
-.t-city{
+.city-table {
 	display: block;
 	border-collapse: collapse;
 }
@@ -24,26 +24,49 @@ tr {
 	border: solid 1px gray;
 }
 
-tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 
-th, td {
+th,
+td {
 	padding: 5px;
 	text-align: left;
 }
 
-th:hover{
+th:hover {
 	background-color: orange;
 	cursor: pointer;
 }
 
-.active:before {
-  content: "<>";
+.city-table-header-column.asc.desc:before {
+	content: '<>'
 }
 
-.tHeader:active{
+.city-table-header-column.asc:before {
+	content: '<'
+}
+
+.city-table-header-column.desc:before {
+	content: '>'
+}
+
+.city-table-header-column.active {
 	transform: scale(1.1);
+	background-color: yellowgreen;
 }
 
-.hidden{
+.table-pagination {
+	min-width: 500px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.btn_prev, .btn_next, .pagination-page {
+	cursor: pointer;
+}
+
+.hidden {
 	visibility: hidden;
 }

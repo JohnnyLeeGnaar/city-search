@@ -12,29 +12,20 @@
 
 		<div class="toolbar">
 			<h3>Cities:</h3>
-			<input type="text" class="search" placeholder="Search for a city or county" name="">
-			<select class="selectToggle">
-				<option selected value="10">10</option>
+			<input type="text" autocomplete="off" class="search" placeholder="Search for a city or county" name="">
+			<select class="page-size" autocomplete="off">
 				<option value="5"  class="option__">5</option>
+				<option selected value="10">10</option>
 				<option value="25" class="option__">25</option>
 			</select>
-			<input type="button" class="btn_prev" data-option=-10 value="Previous page" name="prev">
-			<input type="button" class="btn_next" data-option=10 value="Next page" name="next">
-			<span class="spanInfo">/</span>
-			
-			
 		</div>
 
 
-		<table class="t-city">
+		<table class="city-table">
 			<thead>
-				<tr class="tRow">
-					<th class="tHeader active" data-val="name" data-name="City name">City name</th>
-					<th class="tHeader active" data-val="population" data-name="Population">Population</th>
-					<th class="tHeader active" data-val="adminName1" data-name="County">County</th>
-				</tr>
+				<tr class="city-table-header-row"></tr>
 			</thead>
-			<tbody class="city-list">
+			<tbody class="city-table-body">
 				<tr>
 					<td>
 						<h2>Searching for cities in Croatia:</h2>
@@ -42,11 +33,14 @@
 				</tr>
 			</tbody>
 		</table>
+
+		<div class="table-pagination"></div>
 	</div>
 
 
 
 	<script src="index.js" type="module"></script>
+	<script src="node_modules/url-parse/dist/url-parse.js"></script>
 </body>
 
 </html>

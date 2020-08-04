@@ -1,0 +1,22 @@
+{
+  "name": "city-search",
+  "version": "1.0.0",
+  "description": "Description:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnnyLeeGnaar/city-search.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnnyLeeGnaar/city-search/issues"
+  },
+  "homepage": "https://github.com/JohnnyLeeGnaar/city-search#readme",
+  "dependencies": {
+    "url-parse": "^1.4.7"
+  }
+}
