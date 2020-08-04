@@ -1,5 +1,5 @@
 import mockData from './mock-data/cities.js';
-
+//import api from './mock-data/api.js'
 const link = "http://api.geonames.org/searchJSON?username=joedoe92&country=hr&maxRows=1000&style=LONG&lang=hr&type=json&cities=cities5000";
 const cities = [...mockData.JSON.geonames];
 const citiesTableList = document.querySelector('.tableCityList');
@@ -43,6 +43,14 @@ const state = {
 	sortedCities: cities
 }
 
+
+
+const renderTable = () => {
+
+	renderTableHeader(tableHeaderData);
+	paginateCitiesInTableBody(cities);
+}
+
 const renderTableHeader = (items) => {
 	tableRow.innerHTML = "";
 	items.map(item => {
@@ -63,6 +71,28 @@ const renderTableHeader = (items) => {
 
 		return th;
 	}).forEach(th => tableRow.appendChild(th));
+}
+
+const renderTableBody = (cities) => {
+	console.log(`this page is ${state.page}`)
+	const renderCities = cities.map(city => {
+		return `
+		<tr>
+		<td>${city.name}</td>
+		<td>${city.population}</td>
+		<td>${city.adminName1}</td>
+		</tr>
+		`
+	}).join("")
+
+	return citiesTableList.innerHTML = renderCities;	
+}
+
+const paginateCitiesInTableBody = (cities) => {
+	state.maxPages = Math.ceil(cities.length / state.displayPages);
+	const paginatedCities =  cities.slice((state.page * state.displayPages) - state.displayPages, state.page*state.displayPages )
+	//console.log((state.page * state.displayPages) - state.displayPages, state.page*state.displayPages )
+	renderTableBody(paginatedCities);
 }
 
 const sortBy = (itemValue, nextSort ) => {
@@ -92,25 +122,27 @@ const nextSortOrder = (current) => {
 
 	return next;
 }
-const sortCities = (value, next) => {
-		if(next === 'asc'){
-	return function (a, b){
-		return value === 'population' ? a[value] < b[value] ? 1 : -1 : a[value].localeCompare(b[value]);
-
-	}
-}
-	return function (a, b){
-		return value === 'population' ? a[value] > b[value] ? 1 : -1 : b[value].localeCompare(a[value]);
-}}
 
 const sortCitiesinList = (itemValue, nextSort) =>{
 	state.page = 1;
-	const filteredCities = filterCitiesInList(cities);
-	const sortedCities = filteredCities.sort(sortCities(itemValue, nextSort));
+	const filteredCities = filterCitiesInList(state.sortedCities);
+	const sortedCities = filteredCities.sort(sortCitiesHelperFunc(itemValue, nextSort));
 	state.sortedCities = sortedCities;
 	//console.log(itemValue, nextSort);
 	paginateCitiesInTableBody(sortedCities);
 }
+
+const sortCitiesHelperFunc = (value, next) => {
+		if(next === 'asc'){
+	return function (a, b){
+
+		return  value === 'population' ? a[value] < b[value] ? 1 : -1 : a[value].localeCompare(b[value]);
+
+	}
+}
+	return function (a, b){
+		return  value === 'population' ? a[value] > b[value] ? 1 : -1 : b[value].localeCompare(a[value]);
+}}
 
 const filterCitiesInList = (cities) => {
 	const regex = new RegExp(state.input, 'i');
@@ -120,8 +152,8 @@ const filterCitiesInList = (cities) => {
 
 const filterCityListInput = (e) => {
 	 state.page = 1;
-	 const regex = new RegExp(e.target.value, 'i');
-	 const filteredCities = cities.filter(city => city.name.match(regex))
+	 state.input = e.target.value;
+	 const filteredCities = filterCitiesInList(cities);
 	 state.sortedCities = filteredCities;
 	 paginateCitiesInTableBody(state.sortedCities);
 }
@@ -129,17 +161,21 @@ const filterCityListInputBind = (inputValue = "") => {
 	state.input = inputValue;
 }
 const buttonNext = (e) => {
-	//console.log(state.page);
 	if(state.page < state.maxPages){
 		++state.page;
+	}
+	if(state.page > 1){
+		btn_prev.classList.remove("hidden");
 	}
 	paginateCitiesInTableBody(state.sortedCities);
 }
 
 const buttonPrevious = (e) => {
-	//console.log(state.page);
 	if(state.page > 0){
 		--state.page;	}
+	if(state.page < 2){
+		btn_prev.classList.add("hidden");
+	}
 	paginateCitiesInTableBody(state.sortedCities);
 }
 
@@ -149,55 +185,11 @@ const dropDownPageSizeInput = (e) => {
 	paginateCitiesInTableBody(state.sortedCities);
 }
 
-const paginateCitiesInTableBody = (cities) => {
-	state.maxPages = Math.ceil(cities.length / state.displayPages);
-	const paginatedCities =  cities.slice((state.page * state.displayPages) - state.displayPages, state.page*state.displayPages )
-	console.log((state.page * state.displayPages) - state.displayPages, state.page*state.displayPages )
-	renderTableBody(paginatedCities);
-}
-
-
-const renderTableBody = (cities) => {
-	console.log(`this page is ${state.page}`)
-	const renderCities = cities.map(city => {
-		return `
-		<tr>
-		<td>${city.name}</td>
-		<td>${city.population}</td>
-		<td>${city.adminName1}</td>
-		</tr>
-		`
-	}).join("")
-
-	return citiesTableList.innerHTML = renderCities;
-	
-}
-
-const renderTable = () => {
-
-	renderTableHeader(tableHeaderData);
-	paginateCitiesInTableBody(cities);
-	
-
-}
-
-
-userInput.addEventListener('change', filterCityListInput);
-//userInput.addEventListener('keyup', displayPlaces);
-//tableHeaders.forEach(tableHeader => tableHeader.addEventListener('click', headerSort));
-pageSizeLengthOptions.forEach(option => option.addEventListener('change', dropDownPageSizeInput));
-btn_prev.addEventListener('click', buttonPrevious);
-btn_next.addEventListener('click', buttonNext);
-
-
-
-
 window.addEventListener('load', () => {
-
-
-
+	btn_prev.classList.add("hidden");
+	userInput.addEventListener('change', filterCityListInput);
+	pageSizeLengthOptions.forEach(option => option.addEventListener('change', dropDownPageSizeInput));
+	btn_prev.addEventListener('click', buttonPrevious);
+	btn_next.addEventListener('click', buttonNext);
 	renderTable()
-
-
-
 });
