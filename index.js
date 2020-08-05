@@ -47,12 +47,12 @@ const state = {
 	itemValue: ""
 }
 //URL object
-const myUrl = new URL('http://127.0.0.1/city-search-app/index.html');
+const myUrl = new URL(window.location.href);
 
 const updateUrlObject = () => {
 	myUrl.searchParams.set('displaypages', state.displayPages)
-	myUrl.searchParams.set('input', state.input)
-	window.history.pushState('filler', 'City Search', myUrl.href)
+	//myUrl.searchParams.set('input', state.input)
+	window.history.replaceState('filler', 'City Search', myUrl.href)
 }
 const renderTable = () => {
 	renderTableHeader(tableHeaderData);
@@ -201,10 +201,16 @@ const dropDownPageSizeInput = (e) => {
 }
 
 window.addEventListener('load', () => {
+	state.displayPages = myUrl.searchParams.get('displaypages');
+	const cityHeaderValue = myUrl.searchParams.get('value');
+	const cityHeaderOrder = myUrl.searchParams.get('order');
+	console.log(state.displayPages, cityHeaderValue, cityHeaderOrder)
+	renderTableHeader(tableHeaderData);
+	sortCitiesinList(cityHeaderValue, cityHeaderOrder);
 	btn_prev.classList.add("hidden");
 	userInput.addEventListener('change', filterCityListInput);
 	pageSizeLengthOptions.forEach(option => option.addEventListener('change', dropDownPageSizeInput));
 	btn_prev.addEventListener('click', buttonPrevious);
 	btn_next.addEventListener('click', buttonNext);
-	renderTable()
+	//renderTable()
 });
