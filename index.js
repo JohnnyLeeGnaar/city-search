@@ -10,6 +10,7 @@ const btn_prev = document.querySelector(".btn_prev");
 const pageSizeLengthOptions = document.querySelectorAll('.selectToggle');
 const headers = document.querySelectorAll('tHeader');
 
+
 const tableHeaderData = [
 {
 	name: "City name",
@@ -33,6 +34,7 @@ const tableHeaderData = [
 }
 ]
 
+
 let inputValue = "";
 
 const state = {
@@ -40,13 +42,19 @@ const state = {
 	page: 1,
 	displayPages: 10,
 	maxPages: 10,
-	sortedCities: cities
+	sortedCities: cities,
+	nextSort: "",
+	itemValue: ""
 }
+//URL object
+const myUrl = new URL('http://127.0.0.1/city-search-app/index.html');
 
-
-
+const updateUrlObject = () => {
+	myUrl.searchParams.set('displaypages', state.displayPages)
+	myUrl.searchParams.set('input', state.input)
+	window.history.pushState('filler', 'City Search', myUrl.href)
+}
 const renderTable = () => {
-
 	renderTableHeader(tableHeaderData);
 	paginateCitiesInTableBody(cities);
 }
@@ -125,10 +133,15 @@ const nextSortOrder = (current) => {
 
 const sortCitiesinList = (itemValue, nextSort) =>{
 	state.page = 1;
+	state.itemValue = itemValue;
+	state.nextSort = nextSort;
 	const filteredCities = filterCitiesInList(state.sortedCities);
 	const sortedCities = filteredCities.sort(sortCitiesHelperFunc(itemValue, nextSort));
 	state.sortedCities = sortedCities;
 	//console.log(itemValue, nextSort);
+	myUrl.searchParams.set('order', nextSort)
+	myUrl.searchParams.set('value', itemValue)
+	updateUrlObject();
 	paginateCitiesInTableBody(sortedCities);
 }
 
@@ -155,6 +168,7 @@ const filterCityListInput = (e) => {
 	 state.input = e.target.value;
 	 const filteredCities = filterCitiesInList(cities);
 	 state.sortedCities = filteredCities;
+	 updateUrlObject();
 	 paginateCitiesInTableBody(state.sortedCities);
 }
 const filterCityListInputBind = (inputValue = "") => {
@@ -182,6 +196,7 @@ const buttonPrevious = (e) => {
 const dropDownPageSizeInput = (e) => {
 	state.page = 1;
 	state.displayPages = e.target.value;
+	updateUrlObject();
 	paginateCitiesInTableBody(state.sortedCities);
 }
 
