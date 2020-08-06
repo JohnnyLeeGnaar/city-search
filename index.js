@@ -2,13 +2,13 @@ import mockData from './mock-data/cities.js';
 //import api from './mock-data/api.js'
 const link = "http://api.geonames.org/searchJSON?username=joedoe92&country=hr&maxRows=1000&style=LONG&lang=hr&type=json&cities=cities5000";
 const cities = [...mockData.JSON.geonames];
-const citiesTableList = document.querySelector('.tableCityList');
+const citiesTableList = document.querySelector('.table_body_list');
 const userInput = document.querySelector('.search');
-const tableRow = document.querySelector('.tableRow');
+const tableRow = document.querySelector('.table_row');
 const btn_next = document.querySelector(".btn_next");
 const btn_prev = document.querySelector(".btn_prev");
-const pageSizeLengthOptions = document.querySelectorAll('.selectToggle');
-const headers = document.querySelectorAll('tHeader');
+const pageSizeLengthOptions = document.querySelectorAll('.select_toggle');
+const headers = document.querySelectorAll('table_header');
 
 
 const tableHeaderData = [
@@ -34,29 +34,26 @@ const tableHeaderData = [
 }
 ]
 
-
-let inputValue = "";
-
 const state = {
 	input: "",
 	page: 1,
 	displayPages: 10,
 	maxPages: 10,
 	sortedCities: cities,
-	nextSort: "",
-	itemValue: ""
+	cityHeaderOrder: "asc",
+	cityHeaderValue: "name"
 }
 //URL object
 const myUrl = new URL(window.location.href);
 
+
 const updateUrlObject = () => {
 	myUrl.searchParams.set('displaypages', state.displayPages)
-	//myUrl.searchParams.set('input', state.input)
 	window.history.replaceState('filler', 'City Search', myUrl.href)
 }
 const renderTable = () => {
 	renderTableHeader(tableHeaderData);
-	paginateCitiesInTableBody(cities);
+	sortCitiesinList(state.cityHeaderValue, state.cityHeaderOrder);
 }
 
 const renderTableHeader = (items) => {
@@ -64,7 +61,7 @@ const renderTableHeader = (items) => {
 	items.map(item => {
 		let th = document.createElement("th");
 		th.innerText = item.name;
-		th.classList.add("tHeader");
+		th.classList.add("table_header");
 		th.onclick = () => sortBy(item.value, nextSortOrder(item.sort));
 
 		if (item.active) th.classList.add('active');
@@ -99,7 +96,6 @@ const renderTableBody = (cities) => {
 const paginateCitiesInTableBody = (cities) => {
 	state.maxPages = Math.ceil(cities.length / state.displayPages);
 	const paginatedCities =  cities.slice((state.page * state.displayPages) - state.displayPages, state.page*state.displayPages )
-	//console.log((state.page * state.displayPages) - state.displayPages, state.page*state.displayPages )
 	renderTableBody(paginatedCities);
 }
 
@@ -133,19 +129,18 @@ const nextSortOrder = (current) => {
 
 const sortCitiesinList = (itemValue, nextSort) =>{
 	state.page = 1;
-	state.itemValue = itemValue;
-	state.nextSort = nextSort;
+	state.itemValue = itemValue; 
+	state.nextSort = nextSort; 
 	const filteredCities = filterCitiesInList(state.sortedCities);
 	const sortedCities = filteredCities.sort(sortCitiesHelperFunc(itemValue, nextSort));
 	state.sortedCities = sortedCities;
-	//console.log(itemValue, nextSort);
 	myUrl.searchParams.set('order', nextSort)
 	myUrl.searchParams.set('value', itemValue)
 	updateUrlObject();
 	paginateCitiesInTableBody(sortedCities);
 }
 
-const sortCitiesHelperFunc = (value, next) => {
+const sortCitiesHelperFunc = (value = 'name', next='asc') => {
 		if(next === 'asc'){
 	return function (a, b){
 
@@ -171,9 +166,7 @@ const filterCityListInput = (e) => {
 	 updateUrlObject();
 	 paginateCitiesInTableBody(state.sortedCities);
 }
-const filterCityListInputBind = (inputValue = "") => {
-	state.input = inputValue;
-}
+
 const buttonNext = (e) => {
 	if(state.page < state.maxPages){
 		++state.page;
@@ -200,17 +193,25 @@ const dropDownPageSizeInput = (e) => {
 	paginateCitiesInTableBody(state.sortedCities);
 }
 
-window.addEventListener('load', () => {
-	state.displayPages = myUrl.searchParams.get('displaypages');
-	const cityHeaderValue = myUrl.searchParams.get('value');
-	const cityHeaderOrder = myUrl.searchParams.get('order');
-	console.log(state.displayPages, cityHeaderValue, cityHeaderOrder)
-	renderTableHeader(tableHeaderData);
-	sortCitiesinList(cityHeaderValue, cityHeaderOrder);
+const applicationEventListeners = () => {
 	btn_prev.classList.add("hidden");
 	userInput.addEventListener('change', filterCityListInput);
 	pageSizeLengthOptions.forEach(option => option.addEventListener('change', dropDownPageSizeInput));
 	btn_prev.addEventListener('click', buttonPrevious);
 	btn_next.addEventListener('click', buttonNext);
-	//renderTable()
+}
+
+const parseQueryStringFromUrl =() => {
+	state.displayPages = myUrl.searchParams.get('displaypages') || state.displayPages;
+	state.cityHeaderValue = myUrl.searchParams.get('value') || state.cityHeaderValue;
+	state.cityHeaderOrder = myUrl.searchParams.get('order') || state.cityHeaderOrder;
+}
+
+window.addEventListener('load', () => {
+	
+	parseQueryStringFromUrl();
+	renderTable();
+
+	applicationEventListeners();
+	
 });
