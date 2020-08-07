@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>city finder</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style.css">
+	</head>
 
-<head>
-	<title>city finder</title>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
-</head>
+	<body>
+		<div class="app">
 
-<body>
-	<div class="app">
+			<div class="toolbar">
+				<input type="text" class="search" placeholder="Search for a city or county" autocomplete="off">
+				<select class="page-size-dropdown" autocomplete="off">
+					<option value="5">5</option>
+					<option selected value="10">10</option>
+					<option value="25">25</option>
+				</select>
+				<div class="table-visible-columns"></div>
+			</div>
 
-		<div class="toolbar">
-			<h3>Cities:</h3>
-			<input type="text" class="search" placeholder="Search for a city or county" name="">
-			<select class="selectToggle">
-				<option selected value="10">10</option>
-				<option value="5"  class="option__">5</option>
-				<option value="25" class="option__">25</option>
-			</select>
+			<table class="table">
+				<thead>
+					<tr class="table-heading-row">
+					</tr>
+				</thead>
+				<tbody class="table-body">
+					<tr>
+						<td>
+							<h2>Loading, please hold</h2>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="table-footer">
+				
+			</div>
 		</div>
 
-
-		<table class="citiesTable">
-			<thead>
-				<tr class="tableRow">
-				</tr>
-			</thead>
-			<tbody class="tableCityList">
-				<tr>
-					<td>
-						<h2>Searching for cities in Croatia:</h2>
-					</td>
-				</tr>
-				<div class="tableFooter">
-					<input type="button" class="btn_prev" data-option=-5 value="Previous page" name="prev">
-					<input type="button" class="btn_next" data-option=5 value="Next page" name="next">
-				</div>
-			</tbody>
-		</table>
-	</div>
-
-
-
-	<script src="index.js" type="module"></script>
-</body>
-
+		<script src="index.js" type="module"></script>
+	</body>
 </html>

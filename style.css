@@ -1,4 +1,4 @@
-body{
+body {
 	margin: 0 auto;
 }
 
@@ -14,7 +14,7 @@ body{
 	align-items: center;
 }
 
-.t-city{
+.t-city {
 	display: block;
 	border-collapse: collapse;
 }
@@ -24,19 +24,22 @@ tr {
 	border: solid 1px gray;
 }
 
-tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 
-th, td {
+th,
+td {
 	padding: 5px;
 	text-align: left;
 }
 
-th:hover{
+th:hover {
 	background-color: orange;
 	cursor: pointer;
 }
 
-.active{
+.active {
 	background-color: purple;
 }
 
@@ -48,15 +51,38 @@ th:hover{
 	content: "<";
 }
 
-.unsorted:before {
-  content: "<>";
-
+.table-heading:before {
+	content: "<>";
 }
 
-.tHeader:active{
+.table-heading.asc:before {
+	content: "<";
+}
+
+.table-heading.desc:before {
+	content: ">";
+}
+
+.table-heading:active {
 	transform: scale(1.1);
 }
 
-.hidden{
+.hidden {
 	visibility: hidden;
+}
+
+.table-footer {
+	min-width: 500px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.table-footer button {
+	cursor: pointer;
+}
+
+.table-page-number {
+	padding: 15px;
+	cursor: pointer;
 }
