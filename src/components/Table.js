@@ -1,13 +1,31 @@
 import React from 'react';
-import TableHeaderRender from './TableHeaderRender.js'
+import TableHeader from './TableHeader.js'
 import TableBodyRender from './TableBodyRender.js'
-import "../App.css";
 
 class Table extends React.Component {
 
-  //constructor(props) {    super(props);    this.state = {date: new Date()};  }
+  state = {
+      
+    headers: [{
+      name: "City name",
+      value: "name",
+      visible: true
 
-  //lifecycle methods
+  
+    },
+    {
+      name: "Population",
+      value: "population",
+      visible: true
+  
+    },
+    {
+      name: "County",
+      value: "adminName1",
+      visible: true
+    }]
+  
+    }
 
   componentDidMount(){
   }
@@ -15,15 +33,20 @@ class Table extends React.Component {
   }
 
   render() {
+    const { headers } = this.state;
+    const { orderByValue, orderByDirection, onHeaderClick } = this.props;
     return (
         <table className="table">
 			<thead>
 				<tr className="table-heading-row">
-					<TableHeaderRender />
+          {headers.map(header => (
+            <TableHeader key={header.value} data={header} orderByValue={orderByValue} orderByDirection={orderByDirection} onClick={onHeaderClick}/>
+          ))}
+					
 				</tr>
 			</thead>
 			<tbody className="table-body">
-					<TableBodyRender />
+					<TableBodyRender orderByValue={orderByValue} orderByDirection={orderByDirection} />
 			</tbody>
 		</table>
     );
