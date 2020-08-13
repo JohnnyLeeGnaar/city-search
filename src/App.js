@@ -4,6 +4,8 @@ import TablePagination from './components/TablePagination';
 import Toolbar from './components/Toolbar';
 import "./App.css"
 import api from './components/api';
+import UpdateUrlQueryParams from './components/UpdateUrlQueryParams';
+import ParseUrlQueryParams from './components/ParseUrlQueryParams';
 
 class App extends React.Component {
 
@@ -30,7 +32,6 @@ class App extends React.Component {
   }
   fetchData = () => {
     const { page, pageSize, orderByValue, orderByDirection, search } = this.state;
-
     this.setState({
       items: [],
       pages: null
@@ -69,7 +70,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    const parsedQueryParam = ParseUrlQueryParams();
+    const { orderByValue, orderByDirection, pageSize, page } = parsedQueryParam;
+    this.setState({
+      orderByValue,
+      orderByDirection,
+      pageSize,
+      page
+    }, () => this.fetchData());
+
   }
 
   render() {
@@ -77,6 +86,7 @@ class App extends React.Component {
 
     return (
       <div className="app">
+        <UpdateUrlQueryParams orderByValue={orderByValue} orderByDirection={orderByDirection} search={search} pageSize={pageSize} page={page} />
         <Toolbar search={search} pageSize={pageSize} changePageSize={this.changePageSize} changeSearchQuery={this.changeSearchQuery} />
         <Table orderByValue={orderByValue} orderByDirection={orderByDirection} onHeaderClick={this.changeDirection} bodyItems={items} />
         <TablePagination page={page} pages={pages} changePage={this.changePage} />
