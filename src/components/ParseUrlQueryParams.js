@@ -11,6 +11,9 @@ export default () => {
         if (value) {
             values[param] = value;
         }
+        else{
+            values[param] = "";
+        }
     });
     return values;
 }
