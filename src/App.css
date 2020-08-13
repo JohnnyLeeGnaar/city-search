@@ -73,6 +73,7 @@ th:hover {
 
 .table-footer {
 	min-width: 500px;
+	max-width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
