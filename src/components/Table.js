@@ -27,12 +27,6 @@ class Table extends React.Component {
     }]
 
   }
-
-  componentDidMount() {
-  }
-  componentWillUnmount() {
-  }
-
   render() {
     const { headers } = this.state;
     const { orderByValue, orderByDirection, onHeaderClick, bodyItems } = this.props;
@@ -44,7 +38,6 @@ class Table extends React.Component {
             {headers.map(header => (
               <TableHeader key={header.value} data={header} orderByValue={orderByValue} orderByDirection={orderByDirection} onClick={onHeaderClick} />
             ))}
-
           </tr>
         </thead>
         <tbody className="table-body">
@@ -54,5 +47,4 @@ class Table extends React.Component {
     );
   }
 }
-
 export default Table;

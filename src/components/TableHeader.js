@@ -1,7 +1,7 @@
 import React from 'react';
 
 function TableHeader(props) {
-  const { orderByValue, orderByDirection, onClick, data } = props
+  const { orderByValue, orderByDirection, onClick, data } = props;
   const isActive = data.value === orderByValue ? true : false;
   let direction = '';
 

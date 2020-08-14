@@ -1,21 +1,16 @@
 
 
-export default (newParams) => {
-
- //const newParamKey = [{orderByValue:'name'}, {orderByDirection: 'asc'} ,{search: ''},{pageSize: '10'}, {page: 1}];
+export default () => {
+    const newParam = ['orderByValue', 'orderByDirection', 'search', 'pageSize', 'page'];
     const urlObj = new URL(window.location.href);
     const values = {};
-    //console.log(newParams)
-    for(let prop in newParams) {
-        const value = urlObj.searchParams.get(prop) ;
-        console.log(prop + " " + newParams[prop]);
+
+    newParam.forEach(param => {
+        const value = urlObj.searchParams.get(param);
+
         if (value) {
-            values[prop] = value;
+            values[param] = value;
         }
-        else{
-            values[prop] =  newParams[prop]
-        }
-    };
-    console.log(values);
+    });
     return values;
 }

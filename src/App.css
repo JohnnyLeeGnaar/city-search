@@ -1,6 +1,11 @@
-body {
-	margin: 0 auto;
-}
+html {
+	box-sizing: border-box;
+	background: #f3f5f4;
+	
+	font-family: 'helvetica neue';
+	font-size: 20px;
+	font-weight: 200;
+  }
 
 .app {
 	display: flex;
@@ -14,9 +19,33 @@ body {
 	align-items: center;
 }
 
+input.search {
+	margin-bottom: 20px;
+	margin-right: 5px;
+	text-align: center;
+	outline: 0;
+	border: 2px solid #F7F7F7;
+	width: 100%;
+	position: relative;
+	top: 10px;
+	z-index: 2;
+	border-radius: 2px;
+	font-size: 25px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
+}
+
+.page-size-dropdown{
+	background-color: white;
+	border: 1px solid #90342b;
+	border-radius: 2px;
+}
+
 .t-city {
 	display: block;
 	border-collapse: collapse;
+}
+th{
+background-color: #90342b;
 }
 
 tr {
@@ -25,7 +54,7 @@ tr {
 }
 
 tr:nth-child(even) {
-	background-color: #f2f2f2;
+	background-color: #d2694c;
 }
 
 th,
@@ -40,7 +69,7 @@ th:hover {
 }
 
 .active {
-	background-color: purple;
+	background-color: #c0855d;
 }
 
 .asc:before {
@@ -82,6 +111,28 @@ th:hover {
 
 .table-footer button {
 	cursor: pointer;
+	font-size: 15px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+}
+.page-button:focus,
+.page-button:active:focus {
+    outline: thin dotted;
+    outline: 5px auto;
+    outline-offset: -2px;
+}
+.page-button:hover,
+.page-button:focus {
+    color: #333;
+    text-decoration: none;
 }
 
 .table-page-number {

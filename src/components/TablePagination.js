@@ -14,11 +14,13 @@ export default ({ page, pages, changePage }) => {
     return (
         <div className='table-footer'>
             <button
+                className='page-button'
                 disabled={page === 1 ? true : false}
                 onClick={() => { if (page > 1) changePage(page - 1) }}>Previous
             </button>
             {pagesArr}
             <button
+                className='page-button'
                 disabled={page === pages ? true : false}
                 onClick={() => { if (page < pages) changePage(page + 1) }}>Next
             </button>

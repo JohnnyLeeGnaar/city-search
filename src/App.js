@@ -35,9 +35,10 @@ class App extends React.Component {
     this.setState({
       items: [],
       pages: null
-    }, () => api(page, pageSize, orderByValue, orderByDirection, search).then(result => this.setState({ items: result.data, pages: result.metadata.pages }),
-      UpdateUrlQueryParams({ orderByValue, orderByDirection, search, pageSize, page })
-    ));
+    }, () => api(page, pageSize, orderByValue, orderByDirection, search)
+      .then(result => this.setState({ items: result.data, pages: result.metadata.pages }),
+        UpdateUrlQueryParams({ orderByValue, orderByDirection, search, pageSize, page })
+      ));
   }
 
   changeDirection = (newOrderByVal) => {
@@ -72,18 +73,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const { orderByValue, orderByDirection, search, pageSize, page } = this.state;
-    const parsedQueryParam = ParseUrlQueryParams({orderByValue, orderByDirection, search, pageSize, page});
-    const { byValue, byDirection, filter, pageLength, items } = parsedQueryParam;
-
+    const parsedQueryParam = ParseUrlQueryParams();
+    console.log(parsedQueryParam)
     this.setState({
-      orderByValue: byValue,
-      orderByDirection: byDirection,
-      search: filter,
-      pageSize: pageLength,
-      page: items
+      ...parsedQueryParam
     }, () => this.fetchData());
-
   }
 
   render() {
@@ -98,5 +92,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;
