@@ -47,6 +47,9 @@ input.search {
 .page-size-dropdown{
 	height: 2em;
 	font-size: 16px;
+	font-family: 'helvetica neue';
+	font-size: 16px;
+	font-weight: 200;
 	max-height: 100%;
 	max-width: 20%;
 	background-color: white;
