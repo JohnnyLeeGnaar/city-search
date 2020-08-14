@@ -10,11 +10,12 @@ html {
 	max-width: 100%;
 	max-height: 100%;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
+	flex-direction: column;
 	flex-basis: auto;
 }
 .toolbar {
+	width: 1000px;
 	max-width: 100%;
 	max-height: 100%;
 	display: flex;
@@ -23,6 +24,7 @@ html {
 }
 
 input.search {
+	max-width: 80%;
 	flex: 1;
 	margin-bottom: 20px;
 	margin-right: 5px;
@@ -38,11 +40,17 @@ input.search {
 }
 
 .page-size-dropdown{
+	max-width: 20%;
+	flex: 1;
 	background-color: white;
 	border: 1px solid #90342b;
 	border-radius: 2px;
+	text-align-last:right;
+    padding-right: 29px;
+    direction: rtl;
 }
 table{
+	width: 1000px;
 	max-width: 100%;
 }
 
@@ -108,6 +116,7 @@ th:hover {
 }
 
 .table-footer {
+	width: 1000px;
 	max-width: 100%;
 	max-height: 100%;
 	min-width: 0;
@@ -119,11 +128,9 @@ th:hover {
 }
 
 .table-footer button {
-	flex: 1;
 	cursor: pointer;
 	font-size: 15px;
     margin-bottom: 0;
-    display: inline-block;
     text-decoration: none;
     text-align: center;
     white-space: nowrap;
@@ -150,8 +157,12 @@ th:hover {
 	cursor: pointer;
 }
 
-@media(min-width: 500px){
-input.search {
-	min-width: 460px;
-}
-}
+@media only screen and (max-width: 500px) {
+	.table-footer button {
+		width:100%;
+		height: 2.5em;
+		font-size: 1.1rem;
+		text-align: center;
+		vertical-align: middle;
+	}
+  }
