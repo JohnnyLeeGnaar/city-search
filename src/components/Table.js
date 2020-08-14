@@ -2,7 +2,6 @@ import React from 'react';
 import TableHeader from './TableHeader';
 import TableBodyRender from './TableBodyRender';
 
-
 class Table extends React.Component {
 
   state = {
@@ -25,8 +24,8 @@ class Table extends React.Component {
       value: "adminName1",
       visible: true
     }]
-
   }
+
   render() {
     const { headers } = this.state;
     const { orderByValue, orderByDirection, onHeaderClick, bodyItems } = this.props;

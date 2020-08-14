@@ -25,6 +25,12 @@ html {
 
 input.search {
 	max-width: 80%;
+	height: 1.7em;
+	font-size: 16px;
+	font-family: 'helvetica neue';
+	font-size: 16px;
+	font-weight: 200;
+	max-height: 100%;
 	flex: 1;
 	margin-bottom: 20px;
 	margin-right: 5px;
@@ -39,6 +45,9 @@ input.search {
 }
 
 .page-size-dropdown{
+	height: 2em;
+	font-size: 16px;
+	max-height: 100%;
 	max-width: 20%;
 	background-color: white;
 	flex: 1;
@@ -60,8 +69,11 @@ table{
 	border-collapse: collapse;
 }
 th{
-background-color: #90342b;
-flex-wrap: wrap;
+	background-color: #90342b;
+	flex-wrap: wrap;
+	font-family: 'helvetica neue';
+	font-size: 16px;
+	font-weight: 400;
 }
 
 tr {
@@ -130,6 +142,9 @@ th:hover {
 }
 
 .table-footer button {
+	font-family: 'helvetica neue';
+	font-size: 16px;
+	font-weight: 200;
 	min-width: 80px;
 	cursor: pointer;
     margin-bottom: 0;
@@ -140,6 +155,7 @@ th:hover {
     cursor: pointer;
     user-select: none;
 	border: 1px solid transparent;
+	border-radius: 10%;
 }
 .page-button:focus,
 .page-button:active:focus {
