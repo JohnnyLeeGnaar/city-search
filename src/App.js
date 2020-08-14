@@ -3,9 +3,9 @@ import Table from './components/Table';
 import TablePagination from './components/TablePagination';
 import Toolbar from './components/Toolbar';
 import "./App.css"
-import api from './components/api';
-import UpdateUrlQueryParams from './components/UpdateUrlQueryParams';
-import ParseUrlQueryParams from './components/ParseUrlQueryParams';
+import api from './utils/api';
+import updateUrlQueryParams from './utils/updateUrlQueryParams';
+import parseUrlQueryParams from './utils/parseUrlQueryParams';
 
 class App extends React.Component {
 
@@ -37,7 +37,7 @@ class App extends React.Component {
       pages: null
     }, () => api(page, pageSize, orderByValue, orderByDirection, search)
       .then(result => this.setState({ items: result.data, pages: result.metadata.pages }),
-        UpdateUrlQueryParams({ orderByValue, orderByDirection, search, pageSize, page })
+      updateUrlQueryParams({ orderByValue, orderByDirection, search, pageSize, page })
       ));
   }
 
@@ -73,8 +73,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const parsedQueryParam = ParseUrlQueryParams();
-    console.log(parsedQueryParam)
+    const parsedQueryParam = parseUrlQueryParams();
     this.setState({
       ...parsedQueryParam
     }, () => this.fetchData());

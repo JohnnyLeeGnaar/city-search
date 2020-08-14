@@ -2,7 +2,7 @@ html {
 	margin: 0;
 	background: white;
 	font-family: 'helvetica neue';
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 200;
   }
 
@@ -35,16 +35,17 @@ input.search {
 	top: 10px;
 	z-index: 2;
 	border-radius: 2px;
-	font-size: 25px;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
 }
 
 .page-size-dropdown{
 	max-width: 20%;
-	flex: 1;
 	background-color: white;
-	border: 1px solid #90342b;
+	flex: 1;
+	z-index: 2;
+	border: 2px solid #F7F7F7;
 	border-radius: 2px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
 	text-align-last:right;
     padding-right: 29px;
     direction: rtl;
@@ -116,6 +117,7 @@ th:hover {
 }
 
 .table-footer {
+	margin-top: 2.5%;
 	width: 1000px;
 	max-width: 100%;
 	max-height: 100%;
@@ -128,8 +130,8 @@ th:hover {
 }
 
 .table-footer button {
+	min-width: 80px;
 	cursor: pointer;
-	font-size: 15px;
     margin-bottom: 0;
     text-decoration: none;
     text-align: center;
@@ -152,8 +154,8 @@ th:hover {
 }
 
 .table-page-number {
+	max-width: 20px;
 	flex: 1;
-	padding: 3.4px;
 	cursor: pointer;
 }
 
@@ -161,7 +163,6 @@ th:hover {
 	.table-footer button {
 		width:100%;
 		height: 2.5em;
-		font-size: 1.1rem;
 		text-align: center;
 		vertical-align: middle;
 	}

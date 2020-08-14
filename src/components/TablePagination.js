@@ -10,7 +10,6 @@ export default ({ page, pages, changePage }) => {
                 {page === i ? <b>{i}</b> : i}
             </div>);
     }
-    console.log(pagesArr);
     return (
         <div className='table-footer'>
             <button
@@ -27,6 +26,3 @@ export default ({ page, pages, changePage }) => {
         </div>
     )
 }
-
-
-//<TablePagination page={page} pages={pages} changePage={this.changePage} />
