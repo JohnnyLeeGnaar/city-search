@@ -1,31 +1,34 @@
 html {
-	box-sizing: border-box;
-	background: #f3f5f4;
-	
+	margin: 0;
+	background: white;
 	font-family: 'helvetica neue';
 	font-size: 20px;
 	font-weight: 200;
   }
 
 .app {
+	max-width: 100%;
+	max-height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	flex-basis: auto;
 }
 .toolbar {
-	min-width: 500px;
+	max-width: 100%;
+	max-height: 100%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	align-items: center;
 }
 
 input.search {
+	flex: 1;
 	margin-bottom: 20px;
 	margin-right: 5px;
 	text-align: center;
 	outline: 0;
 	border: 2px solid #F7F7F7;
-	width: 100%;
 	position: relative;
 	top: 10px;
 	z-index: 2;
@@ -39,6 +42,9 @@ input.search {
 	border: 1px solid #90342b;
 	border-radius: 2px;
 }
+table{
+	max-width: 100%;
+}
 
 .t-city {
 	display: block;
@@ -46,6 +52,7 @@ input.search {
 }
 th{
 background-color: #90342b;
+flex-wrap: wrap;
 }
 
 tr {
@@ -54,7 +61,7 @@ tr {
 }
 
 tr:nth-child(even) {
-	background-color: #d2694c;
+	background-color: #f5f5f5;
 }
 
 th,
@@ -101,18 +108,20 @@ th:hover {
 }
 
 .table-footer {
-	min-width: 500px;
 	max-width: 100%;
+	max-height: 100%;
+	min-width: 0;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: stretch;
+	flex-direction: row;
 }
 
 .table-footer button {
+	flex: 1;
 	cursor: pointer;
 	font-size: 15px;
-    padding: 6px 12px;
     margin-bottom: 0;
     display: inline-block;
     text-decoration: none;
@@ -121,7 +130,7 @@ th:hover {
     vertical-align: middle;
     cursor: pointer;
     user-select: none;
-    border: 1px solid transparent;
+	border: 1px solid transparent;
 }
 .page-button:focus,
 .page-button:active:focus {
@@ -136,6 +145,13 @@ th:hover {
 }
 
 .table-page-number {
-	padding: 15px;
+	flex: 1;
+	padding: 3.4px;
 	cursor: pointer;
+}
+
+@media(min-width: 500px){
+input.search {
+	min-width: 460px;
+}
 }
