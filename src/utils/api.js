@@ -3,8 +3,7 @@ import data from "../mock_data/cities";
 export default (page, pageSize, byValue, byDirection, search) => {
     const items = data.JSON.geonames;
 
-    const searchItems = items.filter(item => item.name.toLowerCase().includes(search));
-
+    const searchItems = items.filter(item => item.name.toLowerCase().startsWith(search) || item.adminName1.startsWith(search));
     let sortedItems = searchItems.sort(function (a, b) {
         if (typeof a[byValue] === 'string') {
             return a[byValue].localeCompare(b[byValue]);
@@ -20,6 +19,6 @@ export default (page, pageSize, byValue, byDirection, search) => {
     let pageItems = sortedItems.slice((page * pageSize - pageSize), (page * pageSize));
 
     return new Promise((resolve, reject) => {
-        setTimeout(() => resolve({ data: pageItems, metadata: { pages } }), 500)
+        setTimeout(() => resolve({ data: pageItems, metadata: { pages } }), 300)
     });
 }

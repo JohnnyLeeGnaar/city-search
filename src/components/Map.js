@@ -12,7 +12,7 @@ const width = 500;
 
 class Map extends React.Component {
   render() {
-    const { bodyItems, changeMap } = this.props;
+    const { bodyItems, changeMap, changeSearchQuery } = this.props;
 
     return (
       <div className="map">
@@ -44,6 +44,10 @@ class Map extends React.Component {
                   onMouseLeave={() => {
                     changeMap("");
                   }}
+                  onMouseDown={() => {
+                    const { NAME_1 } = geo.properties;
+                    changeSearchQuery(NAME_1)
+                  }}
                   style={{
                     default: {
                       fill: "#D6D6DA",
@@ -64,7 +68,10 @@ class Map extends React.Component {
           </Geographies>
           {bodyItems.map((item) => (
             <Marker key={item.name} coordinates={[item.lng, item.lat]}>
-              <circle r={6} fill="#90342b" />
+              {item.population < 10000 && <circle r={4} fill="#90342b" /> } ||
+              {item.population > 10000 && <circle r={6} fill="#90342b" /> } ||
+              {item.population > 35000 && <circle r={10} fill="#90342b" /> } ||
+              {item.name === 'Zagreb' && <circle r={12} fill="#90342b" /> }
             </Marker>
           ))}
         </ComposableMap>

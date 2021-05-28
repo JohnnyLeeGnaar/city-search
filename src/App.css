@@ -120,23 +120,23 @@ th:hover {
 }
 
 .asc:before {
-  content: ">";
+  content: "➡️ ";
 }
 
 .desc:before {
-  content: "<";
+  content: "⬅️ ";
 }
 
 .table-heading:before {
-  content: "<>";
+  content: "↔️ ";
 }
 
 .table-heading.asc:before {
-  content: "<";
+  content: "⬅️ ";
 }
 
 .table-heading.desc:before {
-  content: ">";
+  content: "➡️ ";
 }
 
 .table-heading:active {

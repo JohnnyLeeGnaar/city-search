@@ -1,16 +1,15 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
-
+import data from "./mock_data/cities";
 import Table from "./components/Table";
 import Map from "./components/Map";
 import TablePagination from "./components/TablePagination";
 import Toolbar from "./components/Toolbar";
 import "./App.css";
 import api from "./utils/api";
-import updateUrlQueryParams from "./utils/updateUrlQueryParams";
-import parseUrlQueryParams from "./utils/parseUrlQueryParams";
-
-
+//import updateUrlQueryParams from "./utils/updateUrlQueryParams";
+//import parseUrlQueryParams from "./utils/parseUrlQueryParams";
+const items = data.JSON.geonames;
 
 class App extends React.Component {
   state = {
@@ -21,9 +20,9 @@ class App extends React.Component {
     search: "",
     items: [],
     pages: null,
-    map: ""
+    map: "",
   };
-  
+
   nextSortOrder = (val) => {
     let next;
 
@@ -47,7 +46,8 @@ class App extends React.Component {
       () =>
         api(page, pageSize, orderByValue, orderByDirection, search).then(
           (result) =>
-            this.setState({ items: result.data, pages: result.metadata.pages }),
+            this.setState({ items: result.data, pages: result.metadata.pages })
+          /*
           updateUrlQueryParams({
             orderByValue,
             orderByDirection,
@@ -55,6 +55,7 @@ class App extends React.Component {
             pageSize,
             page,
           })
+          */
         )
     );
   };
@@ -103,21 +104,13 @@ class App extends React.Component {
   };
 
   changeMap = (Newmap) => {
-    this.setState(
-      {
-        map: Newmap
-      }
-    )
-  }
+    this.setState({
+      map: Newmap,
+    });
+  };
 
   componentDidMount() {
-    const parsedQueryParam = parseUrlQueryParams();
-    this.setState(
-      {
-        ...parsedQueryParam,
-      },
-      () => this.fetchData()
-    );
+    this.fetchData();
   }
 
   render() {
@@ -129,7 +122,7 @@ class App extends React.Component {
       pageSize,
       page,
       pages,
-      map
+      map,
     } = this.state;
 
     return (
@@ -147,9 +140,10 @@ class App extends React.Component {
             onHeaderClick={this.changeDirection}
             bodyItems={items}
           />
-          <Map 
+          <Map
             bodyItems={items}
             changeMap={this.changeMap}
+            changeSearchQuery={this.changeSearchQuery}
           />
           <ReactTooltip>{map}</ReactTooltip>
         </div>
