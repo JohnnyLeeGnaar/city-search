@@ -21,7 +21,7 @@ function TableRow(props) {
         <td>{item.adminName1}</td>
       </tr>
       {isActive && (
-        <TableRowExpanded setIsActive={setIsActive} isActive={isActive} />
+        <TableRowExpanded setIsActive={setIsActive} isActive={isActive} name={item.name} />
       )}
     </React.Fragment>
   );

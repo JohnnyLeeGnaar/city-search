@@ -1,7 +1,7 @@
 import React from "react";
 
 function TableRowExpanded(props) {
-  const { isActive, setIsActive } = props;
+  const { isActive, setIsActive, name } = props;
 
   const city = {
     name: "Bjelovar",
@@ -14,17 +14,17 @@ function TableRowExpanded(props) {
   };
 
   return (
-    <tr className='chunky'
+    <tr
       onClick={() => {
         setIsActive(!isActive);
       }}
     >
-      <td>
-        <div>
-          <div>
-            <h3>{city.name}</h3>
+      <td colSpan="3">
+        <div className="chunky">
+          <div className="flex-container">
+            <p className="flex-item">{city.description}</p>
+            <img  width='200' height='200'src="https://upload.wikimedia.org/wikipedia/hr/9/9d/Bjelovar_%28grb%29.gif" />
             <hr />
-            <p>{city.description}</p>
           </div>
         </div>
       </td>

@@ -28,27 +28,26 @@ class Table extends React.Component {
     const { orderByValue, orderByDirection, onHeaderClick, bodyItems } =
       this.props;
 
-
     return (
-      <div className='table-flex-wrapper'>
-       <table className="table">
-        <thead>
-          <tr className="table-heading-row">
-            {headers.map((header) => (
-              <TableHeader
-                key={header.value}
-                data={header}
-                orderByValue={orderByValue}
-                orderByDirection={orderByDirection}
-                onClick={onHeaderClick}
-              />
-            ))}
-          </tr>
-        </thead>
-        <tbody className="table-body">
-          <TableBodyRender items={bodyItems} />
-        </tbody>
-      </table>
+      <div className="table-flex-wrapper">
+        <table className="table">
+          <thead>
+            <tr className="table-heading-row">
+              {headers.map((header) => (
+                <TableHeader
+                  key={header.value}
+                  data={header}
+                  orderByValue={orderByValue}
+                  orderByDirection={orderByDirection}
+                  onClick={onHeaderClick}
+                />
+              ))}
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            <TableBodyRender items={bodyItems} />
+          </tbody>
+        </table>
       </div>
     );
   }
