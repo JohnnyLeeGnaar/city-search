@@ -1,22 +1,15 @@
+import React, { useState, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import React from 'react';
-
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
+import TableRow from "./TableRow";
 
 function TableBodyRender(props) {
-    const { items } = props;
+  const { items } = props;
 
-    const itemList = items.map((item, index) => {
-        return (<tr key={index}>
-            <td>{item.name}</td>
-            <td>{numberWithCommas(item.population)}</td>
-            <td>{item.adminName1}</td>
-        </tr>)
-    })
-    return itemList;
-
+  const itemList = items.map((item) => {
+    return <TableRow key={item.geonameId} item={item} />;
+  });
+  return itemList;
 }
 export default TableBodyRender;
-

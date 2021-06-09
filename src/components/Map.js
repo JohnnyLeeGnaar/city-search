@@ -68,10 +68,10 @@ class Map extends React.Component {
           </Geographies>
           {bodyItems.map((item) => (
             <Marker key={item.name} coordinates={[item.lng, item.lat]}>
-              {item.population < 10000 && <circle r={4} fill="#90342b" /> } ||
-              {item.population > 10000 && <circle r={6} fill="#90342b" /> } ||
+              {item.population < 10000 && <circle r={4} fill="#c64d41" /> } ||
+              {item.population > 10000 && <circle r={6} fill="#a43b31" /> } ||
               {item.population > 35000 && <circle r={10} fill="#90342b" /> } ||
-              {item.name === 'Zagreb' && <circle r={12} fill="#90342b" /> }
+              {item.name === 'Zagreb' && <circle r={12} fill="#551f19" /> }
             </Marker>
           ))}
         </ComposableMap>

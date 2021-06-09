@@ -92,13 +92,14 @@ th {
   flex-wrap: wrap;
   font-family: "helvetica neue";
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 tr {
   padding: 5px 10px;
   border: solid 1px gray;
 }
+
 
 tr:nth-child(even) {
   background-color: #f5f5f5;
@@ -113,6 +114,10 @@ td {
 th:hover {
   background-color: orange;
   cursor: pointer;
+}
+
+.chunky {
+  width: 100%;
 }
 
 .active {
