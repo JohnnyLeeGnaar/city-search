@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 
 function TableRowExpanded(props) {
   const { isActive, setIsActive, name } = props;
+  const modal = useRef(null);
+
+  const onButtonClick = () => {
+    modal.current.className = "modal-hidden";
+    setIsActive(!isActive);
+  };
 
   const city = {
     name: "Bjelovar",
@@ -14,7 +20,33 @@ function TableRowExpanded(props) {
   };
 
   return (
-    <tr
+    <tr>
+      <td>
+        <div
+          ref={modal}
+          className={`modal ${isActive ? "modal-active" : "modal-hidden"}`}
+        >
+          <div className="modal-content flex-container">
+            <span className="close" onClick={onButtonClick}>
+              &times;
+            </span>
+            <p className="flex-item">{city.description}</p>
+            <img
+            
+              src="https://upload.wikimedia.org/wikipedia/hr/9/9d/Bjelovar_%28grb%29.gif"
+            />
+          </div>
+        </div>
+      </td>
+    </tr>
+  );
+}
+
+export default TableRowExpanded;
+
+/*
+
+<tr
       onClick={() => {
         setIsActive(!isActive);
       }}
@@ -29,7 +61,5 @@ function TableRowExpanded(props) {
         </div>
       </td>
     </tr>
-  );
-}
 
-export default TableRowExpanded;
+    */

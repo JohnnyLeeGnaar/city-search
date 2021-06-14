@@ -19,6 +19,6 @@ export default (page, pageSize, byValue, byDirection, search) => {
     let pageItems = sortedItems.slice((page * pageSize - pageSize), (page * pageSize));
 
     return new Promise((resolve, reject) => {
-        setTimeout(() => resolve({ data: pageItems, metadata: { pages } }), 300)
+        setTimeout(() => resolve({ data: pageItems, metadata: { pages } }), 50)
     });
 }
