@@ -20,21 +20,18 @@ function TableRowExpanded(props) {
   };
 
   return (
-    <tr>
-      <td>
+    <tr onClick={onButtonClick}>
+      <td colSpan="3">
         <div
           ref={modal}
           className={`modal ${isActive ? "modal-active" : "modal-hidden"}`}
         >
           <div className="modal-content flex-container">
-            <span className="close" onClick={onButtonClick}>
+            <span className="close" >
               &times;
             </span>
             <p className="flex-item">{city.description}</p>
-            <img
-            
-              src="https://upload.wikimedia.org/wikipedia/hr/9/9d/Bjelovar_%28grb%29.gif"
-            />
+            <img src="https://upload.wikimedia.org/wikipedia/hr/9/9d/Bjelovar_%28grb%29.gif" />
           </div>
         </div>
       </td>
@@ -43,23 +40,3 @@ function TableRowExpanded(props) {
 }
 
 export default TableRowExpanded;
-
-/*
-
-<tr
-      onClick={() => {
-        setIsActive(!isActive);
-      }}
-    >
-      <td colSpan="3">
-        <div className="chunky">
-          <div className="flex-container">
-            <p className="flex-item">{city.description}</p>
-            <img  width='200' height='200'src="https://upload.wikimedia.org/wikipedia/hr/9/9d/Bjelovar_%28grb%29.gif" />
-            <hr />
-          </div>
-        </div>
-      </td>
-    </tr>
-
-    */

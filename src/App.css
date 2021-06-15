@@ -162,23 +162,26 @@ th:hover {
 }
 
 .asc:before {
-  content: "➡️ ";
+  content: "› ";
 }
 
 .desc:before {
-  content: "⬅️ ";
+  content: "‹ ";
+}
+.table-heading {
+  white-space: nowrap;
 }
 
 .table-heading:before {
-  content: "↔️ ";
+  content: "‹› ";
 }
 
 .table-heading.asc:before {
-  content: "⬅️ ";
+  content: "‹ ";
 }
 
 .table-heading.desc:before {
-  content: "➡️ ";
+  content: "› ";
 }
 
 .table-heading:active {
@@ -254,9 +257,6 @@ th:hover {
 
 .modal-active {
   display: block; /* Hidden by default */
-}
-
-.modal-hidden {
 }
 
 @media only screen and (max-width: 700px) {
