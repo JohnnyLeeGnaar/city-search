@@ -71,13 +71,20 @@ input.search {
   max-height: 100%;
 }
 table {
+  
   width: 470px;
   max-width: 100%;
 }
 
-table-flex-wrapper {
+
+.table-flex-wrapper {
   flex: auto;
 }
+
+.table-wrapper {
+  min-height: 200px;
+}
+
 
 map {
   flex: auto;
@@ -257,6 +264,10 @@ th:hover {
 
 .modal-active {
   display: block; /* Hidden by default */
+}
+
+.city-detail-header {
+  display: block;
 }
 
 @media only screen and (max-width: 700px) {

@@ -26,6 +26,7 @@ function TableRowExpanded(props) {
           ref={modal}
           className={`modal ${isActive ? "modal-active" : "modal-hidden"}`}
         >
+          <h3 className='city-detail-header'>{city.name}</h3>
           <div className="modal-content flex-container">
             <span className="close" >
               &times;

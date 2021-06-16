@@ -134,12 +134,16 @@ class App extends React.Component {
           changeSearchQuery={this.changeSearchQuery}
         />
         <div className="table-map-flex-wrapper">
-          <Table
-            orderByValue={orderByValue}
-            orderByDirection={orderByDirection}
-            onHeaderClick={this.changeDirection}
-            bodyItems={items}
-          />
+          <div className="table-wrapper">
+            <Table
+              orderByValue={orderByValue}
+              orderByDirection={orderByDirection}
+              onHeaderClick={this.changeDirection}
+              bodyItems={items}
+              pageSize={pageSize}
+            />
+          </div>
+
           <Map
             bodyItems={items}
             changeMap={this.changeMap}
