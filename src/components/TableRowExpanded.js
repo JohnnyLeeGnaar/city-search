@@ -1,13 +1,47 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import wiki from "wikijs";
 
 function TableRowExpanded(props) {
+  const [city, setCity] = useState(false);
   const { isActive, setIsActive, name } = props;
   const modal = useRef(null);
+
+  useEffect(() => {
+    wiki()
+      .page(name)
+      .then((page) => page.summary())
+      .then((prop) => setCity(prop)); //[0].content
+  }, [city]);
 
   const onButtonClick = () => {
     modal.current.className = "modal-hidden";
     setIsActive(!isActive);
   };
+
+  return (
+    <tr onClick={onButtonClick}>
+      <td colSpan="3">
+        <div
+          ref={modal}
+          className={`modal ${isActive ? "modal-active" : "modal-hidden"}`}
+        >
+          <h3 className="city-detail-header">{name}</h3>
+          <div className="modal-content flex-container">
+            <span className="close">&times;</span>
+            {city && <p className="flex-item">{city}</p>}
+            <img src="https://upload.wikimedia.org/wikipedia/hr/9/9d/Bjelovar_%28grb%29.gif" />
+          </div>
+        </div>
+      </td>
+    </tr>
+  );
+}
+
+export default TableRowExpanded;
+
+/*
+
+   
 
   const city = {
     name: "Bjelovar",
@@ -19,25 +53,4 @@ function TableRowExpanded(props) {
       Zahvaljujući pionirskom djelovanju Zagonetačkog društva »Čvor« Bjelovar je izrastao u hrvatsku prijestolnicu zagonetaštva, zadobivši naziv enigmopolisa. `,
   };
 
-  return (
-    <tr onClick={onButtonClick}>
-      <td colSpan="3">
-        <div
-          ref={modal}
-          className={`modal ${isActive ? "modal-active" : "modal-hidden"}`}
-        >
-          <h3 className='city-detail-header'>{city.name}</h3>
-          <div className="modal-content flex-container">
-            <span className="close" >
-              &times;
-            </span>
-            <p className="flex-item">{city.description}</p>
-            <img src="https://upload.wikimedia.org/wikipedia/hr/9/9d/Bjelovar_%28grb%29.gif" />
-          </div>
-        </div>
-      </td>
-    </tr>
-  );
-}
-
-export default TableRowExpanded;
+  */
