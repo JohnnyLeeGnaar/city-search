@@ -7,12 +7,8 @@ function TableRowExpanded(props) {
   const modal = useRef(null);
 
   useEffect(() => {
-    wiki()
-    .page('Batman')
-	.then(page => page.info('alterEgo'))
-	.then(console.log); // Bruce Wayne
 
-    wiki()
+    wiki({ apiUrl: 'https://en.wikipedia.org/w/api.php' })
       .page(name)
       .then((page) => page.summary())
       .then((prop) => setCity(prop)); //[0].content
