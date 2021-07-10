@@ -8,6 +8,11 @@ function TableRowExpanded(props) {
 
   useEffect(() => {
     wiki()
+    .page('Batman')
+	.then(page => page.info('alterEgo'))
+	.then(console.log); // Bruce Wayne
+
+    wiki()
       .page(name)
       .then((page) => page.summary())
       .then((prop) => setCity(prop)); //[0].content
