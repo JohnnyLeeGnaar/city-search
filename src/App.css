@@ -71,11 +71,9 @@ input.search {
   max-height: 100%;
 }
 table {
-  
   width: 470px;
   max-width: 100%;
 }
-
 
 .table-flex-wrapper {
   flex: auto;
@@ -85,9 +83,14 @@ table {
   min-height: 200px;
 }
 
-
 map {
   flex: auto;
+}
+iframe {
+  border: none;
+  width: 100%;
+  height: 1200px;
+  display: none;
 }
 
 .t-city {

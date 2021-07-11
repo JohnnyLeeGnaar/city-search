@@ -3326,6 +3326,11 @@
     "isobject" "^3.0.0"
     "static-extend" "^0.1.1"
 
+"classnames@^2.2.3":
+  "integrity" "sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA=="
+  "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz"
+  "version" "2.3.1"
+
 "clean-css@^4.2.3":
   "integrity" "sha512-VcMWDN54ZN/DS+g58HYL5/n4Zrqe8vHJpGA8KdgUXFU4fuP/aHNw8eld9SyEIyabIMJX/0RaY/fplOo5hYLSFA=="
   "resolved" "https://registry.npmjs.org/clean-css/-/clean-css-4.2.3.tgz"
@@ -7110,6 +7115,11 @@
     "emojis-list" "^2.0.0"
     "json5" "^1.0.1"
 
+"loaders.css@^0.1.2":
+  "integrity" "sha1-Op+0NybHMzSjgUKvnQYpAZtlh0M="
+  "resolved" "https://registry.npmjs.org/loaders.css/-/loaders.css-0.1.2.tgz"
+  "version" "0.1.2"
+
 "locate-path@^2.0.0":
   "integrity" "sha1-K1aLJl7slExtnA3pw9u7ygNUzY4="
   "resolved" "https://registry.npmjs.org/locate-path/-/locate-path-2.0.0.tgz"
@@ -9037,7 +9047,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.7.2":
+"prop-types@^15.5.8", "prop-types@^15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -9252,6 +9262,13 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   "version" "6.0.9"
 
+"react-iframe@^1.8.0":
+  "integrity" "sha512-NYi89+rEqREwQxW9sDf+akh6/dtwWd3bOjByoVEIQ7SicOxVawRMer3pLdWjFaHXpuxTB9NqobPf/Ohj2iAKkg=="
+  "resolved" "https://registry.npmjs.org/react-iframe/-/react-iframe-1.8.0.tgz"
+  "version" "1.8.0"
+  dependencies:
+    "object-assign" "^4.1.1"
+
 "react-is@^16.8.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -9343,6 +9360,16 @@
     "d3-zoom" "^2.0.0"
     "topojson-client" "^3.1.0"
 
+"react-spinkit@^3.0.0":
+  "integrity" "sha1-Mf2vThgXd2bFfRsfMzApD4SSqFo="
+  "resolved" "https://registry.npmjs.org/react-spinkit/-/react-spinkit-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "classnames" "^2.2.3"
+    "loaders.css" "^0.1.2"
+    "object-assign" "^4.1.0"
+    "prop-types" "^15.5.8"
+
 "react-tooltip@^4.2.21":
   "integrity" "sha512-zSLprMymBDowknr0KVDiJ05IjZn9mQhhg4PRsqln0OZtURAJ1snt1xi5daZfagsh6vfsziZrc9pErPTDY1ACig=="
   "resolved" "https://registry.npmjs.org/react-tooltip/-/react-tooltip-4.2.21.tgz"
@@ -9351,7 +9378,7 @@
     "prop-types" "^15.7.2"
     "uuid" "^7.0.3"
 
-"react@*", "react@^16.8.0 || 17.x", "react@^17.0.2", "react@>= 16", "react@>=16.0.0", "react@>=16.x", "react@17.0.2":
+"react@*", "react@^16.8.0 || 17.x", "react@^17.0.2", "react@>= 16", "react@>=16.0.0", "react@>=16.x", "react@>=16.x.x", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

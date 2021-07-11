@@ -1,15 +1,11 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import data from "./mock_data/cities";
 import Table from "./components/Table";
 import Map from "./components/Map";
 import TablePagination from "./components/TablePagination";
 import Toolbar from "./components/Toolbar";
 import "./App.css";
 import api from "./utils/api";
-//import updateUrlQueryParams from "./utils/updateUrlQueryParams";
-//import parseUrlQueryParams from "./utils/parseUrlQueryParams";
-const items = data.JSON.geonames;
 
 class App extends React.Component {
   state = {
