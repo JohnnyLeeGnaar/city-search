@@ -5,8 +5,8 @@ export default (page, pageSize, byValue, byDirection, search) => {
 
   const searchItems = items.filter(
     (item) =>
-      item.name.includes(search) ||
-      item.adminName1.startsWith(search)
+      item.name.toLowerCase().includes(search) ||
+      item.adminName1.toLowerCase().startsWith(search)
   );
   let sortedItems = searchItems.sort(function (a, b) {
     if (typeof a[byValue] === "string") {
